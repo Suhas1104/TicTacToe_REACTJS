@@ -14,6 +14,7 @@ function Square({ value, handleClick }) {
 }
 
 export default function Board() {
+  setXIsNext(true)
   const [squares, setSquares] = useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     function calcwin(square){
@@ -75,7 +76,7 @@ export default function Board() {
         <Square value={squares[8]}  handleClick={()=>handleClick(8)} />
       </div>
       <div className="board-row">
-        <button onClick={()=>{setSquares([].fill(null));setXIsNext(true);}}>reset</button>
+        <button onClick={()=>{setSquares([].fill(null));}}>reset</button>
       </div>
     </>
   );
