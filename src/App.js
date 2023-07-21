@@ -75,7 +75,7 @@ export default function Board() {
         <Square value={squares[8]}  handleClick={()=>handleClick(8)} />
       </div>
       <div className="board-row">
-        <button onClick={()=>setSquares([].fill(null))}>reset</button>
+        <button onClick={()=>{setSquares([].fill(null));setXIsNext(true);}}>reset</button>
       </div>
     </>
   );
