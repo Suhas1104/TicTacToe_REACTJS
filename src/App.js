@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 import { useState } from "react";
 
 function Square({ value, handleClick }) {
-  const [val, setVal] = useState(null);
+
 
   return (
     <button className="square" onClick={handleClick}>
@@ -14,9 +14,11 @@ function Square({ value, handleClick }) {
 }
 
 export default function Board() {
-  setXIsNext(true)
+  
   const [squares, setSquares] = useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
+   
+    
     function calcwin(square){
       const lines=[
         [0,1,2],
@@ -57,6 +59,7 @@ export default function Board() {
     setXIsNext(!xIsNext)
     setSquares(nextSquares);
   }
+  
   return (
     <>
     <h1>{status}</h1>
@@ -76,7 +79,7 @@ export default function Board() {
         <Square value={squares[8]}  handleClick={()=>handleClick(8)} />
       </div>
       <div className="board-row">
-        <button onClick={()=>{setSquares([].fill(null));}}>reset</button>
+        <button onClick={()=>{setSquares([].fill(null));setXIsNext(true)}}>reset</button>
       </div>
     </>
   );
