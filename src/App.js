@@ -16,11 +16,11 @@ function Square({ value, handleClick }) {
 export default function Board() {
   
   const [squares, setSquares] = useState(Array(9).fill(null));
-    const [xIsNext, setXIsNext] = useState(true);
-   
-    
-    function calcwin(square){
-      const lines=[
+  const [xIsNext, setXIsNext] = useState(true);
+  let status="";
+
+  function calcwin(square){
+    const lines=[
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -30,20 +30,22 @@ export default function Board() {
         [0,4,8],
         [2,4,6]
       ]
-      for(let i=0;i<lines.length;i++)
+    for(let i=0;i<lines.length;i++)
       {
         const [a,b,c]=lines[i]
         if(square[a]&&square[a]==square[b]&&square[b]==square[c])
         return square[a]
-       
       }
       return null
-    }
-    const winner = calcwin(squares);
-  let status;
+  }
+    
+  const winner = calcwin(squares);
   if (winner) {
     status = "Winner: " + winner;
-  } else {
+  }else if(isfull(squares)){
+    
+    status="draw"
+}else{
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
   function handleClick(i) {
@@ -59,10 +61,24 @@ export default function Board() {
     setXIsNext(!xIsNext)
     setSquares(nextSquares);
   }
+  function isfull(square){
+    
+    for(let i=0;i<square.length;i++)
+    {
+      if(square[i]==null||square.length==0){
+      return false
+      }
+      else 
+      continue
+    }
+    return true
+  }
   
   return (
     <>
-    <h1>{status}</h1>
+    
+    <h1>TIC TAC TOE</h1>
+    <h3>{status}</h3>
       <div className="board-row">
         <Square value={squares[0]} handleClick={()=>handleClick(0)} />
         <Square value={squares[1]}  handleClick={()=>handleClick(1)} />
@@ -79,8 +95,9 @@ export default function Board() {
         <Square value={squares[8]}  handleClick={()=>handleClick(8)} />
       </div>
       <div className="board-row">
-        <button onClick={()=>{setSquares([].fill(null));setXIsNext(true)}}>reset</button>
+        <button onClick={()=>{setSquares(Array(9).fill(null));setXIsNext(true);status="Next player: X"}}>reset</button>
       </div>
+    
     </>
   );
 }
